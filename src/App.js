@@ -8,13 +8,13 @@ const GAME_HEIGHT = 500;
 const GRAVITY = 6;
 const JUMP_HEIGHT = 100;
 const OBSTACLE_WIDTH = 40;
-const OBSTACLE_GAP = 300;
+const OBSTACLE_GAP = 160;
 
 function App() {
   const [coffeePosition, setCoffeePosition] = useState(250);
   //starting the game on click
   const [gameStarted, setGameStarted] = useState(false);
-  const [obstacleHeight, setObstacleHeight] = useState(200);
+  const [obstacleHeight, setObstacleHeight] = useState(300);
   const [obstacleLeft, setObstacleLeft] = useState(GAME_WIDTH - OBSTACLE_WIDTH);
   const [score, setScore] = useState(0);
 
@@ -52,6 +52,7 @@ function App() {
     }
   }, [gameStarted, obstacleLeft]);
 
+  //collision detection
   useEffect(() => {
     const hasCollidedWithTopObstacle =
       coffeePosition >= 0 && coffeePosition < obstacleHeight;
@@ -130,10 +131,11 @@ const GameBox = styled.div`
   height: ${(props) => props.height}px;
   width: ${(props) => props.width}px;
   background-color: blue;
+  overflow: hidden;
 `;
 
 const Obstacle = styled.div`
-  position: relativel;
+  position: relative;
   top: ${(props) => props.top}px;
   background-color: green;
   width: ${(props) => props.width}px;
